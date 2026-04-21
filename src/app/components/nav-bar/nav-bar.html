@@ -1,0 +1,3 @@
+<nav class="navbar">
+    <button class="nav-btn" *ngFor="let item of menu"  [routerLink]="item.route"  > {{ item.label }}</button>
+</nav>
