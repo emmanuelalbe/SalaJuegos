@@ -4,12 +4,7 @@
 <h1>Estamos Trabajando para usted</h1>
 <router-outlet />
 
-<h1>traerNombre</h1>
-<input type="text" [(ngModel)]="nombre" placeholder="Ingrese el nombre del personaje" />
 
-<button (click)="obtenerNombre()">Buscar</button>
 
-@if(this.api.personaje()){
-    <p>El nombre del personaje es: {{ this.api.personaje().name }}</p>
-    <img [src]="this.api.personaje().image" alt="">
-}
+
+

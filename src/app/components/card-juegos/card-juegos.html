@@ -1,0 +1,13 @@
+
+
+
+<h1>Mis Videojuegos</h1>
+
+<div class="grid">
+  <app-card
+    *ngFor="let juego of misJuegos"
+    [title]="juego.title"
+    [image]="juego.image"
+    [description]="juego.description">
+  </app-card>
+</div>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { CardJuegos } from '../../components/card-juegos/card-juegos';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [CardJuegos],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

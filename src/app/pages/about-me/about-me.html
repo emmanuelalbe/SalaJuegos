@@ -1,16 +1,7 @@
-<p>about-me works! Funciona</p>
-
-<div>
-  <h2>{{ usuario().name }}</h2>
-  <img [src]="usuario().avatar_url" width="150">
-  <p>{{ usuario().bio }}</p>
-</div>
-
-<app-card
-  [title]="usuario()?.name"
-  [image]="usuario()?.avatar_url"
-  [description]="usuario()?.bio">
-</app-card>
+<p>
+  Esta es la sección "Sobre mí". Aquí puedes
+  encontrar información sobre mi experiencia, habilidades y proyectos.
+</p>
 
 <app-card
   *ngIf="usuario() as user"
