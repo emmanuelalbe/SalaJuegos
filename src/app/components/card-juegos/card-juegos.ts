@@ -11,21 +11,27 @@ import { Card } from '../card/card';
   styleUrl: './card-juegos.css',
 })
 export class CardJuegos {
+
   misJuegos = [
     {
-      title: 'The Legend of Zelda',
-      image: 'assets/zelda.jpg',
+      title: 'Ahorcado',
+      image: 'TrabajoPractico/src/assets/img/logo.png',
       description: 'Una aventura épica en el reino de Hyrule.'
     },
     {
-      title: 'Super Mario Odyssey',
-      image: 'assets/mario.jpg',
+      title: 'Mayor o menor',
+      image: 'TrabajoPractico/src/assets/img/logo.png',
       description: 'Un viaje de plataformas en 3D por todo el mundo.'
     },
     {
-      title: 'Elden Ring',
-      image: 'assets/elden.jpg',
+      title: 'Preguntados',
+      image: 'assets/img/logo.jpg',
       description: 'Un RPG de acción en un vasto mundo abierto.'
+    },
+    {
+      title: 'Juego PROPIO',
+      image: 'assets/img/logo.jpg',
+      description: 'Todabia no se que juego poner, pero va a ser un juegazo'
     }
   ];
 }
