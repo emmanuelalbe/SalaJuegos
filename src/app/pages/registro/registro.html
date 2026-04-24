@@ -1,106 +1,111 @@
-<div class="card-container">
-  <h1 class="card-title">Registrate</h1>
+<div id="fondo">
 
-  <form class="card-form" [formGroup]="formulario" (ngSubmit)="mosrarDatos()">
+  <div class="card-container">
 
-    <!-- NOMBRE -->
-    <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input id="nombre" type="text" formControlName="nombre"
-        [className]="formulario.controls.nombre.invalid && formulario.controls.nombre.touched ? 'error' : ''" />
+    <h1 class="card-title">Registrate</h1>
 
-      @if (formulario.controls.nombre.errors && formulario.controls.nombre.touched) {
-        @if (formulario.controls.nombre.errors['required']) {
-          <small class="small-error">El nombre es obligatorio</small>
+      <form class="card-form" [formGroup]="formulario" (ngSubmit)="mosrarDatos()">
+
+      <!-- NOMBRE -->
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" formControlName="nombre"
+          [className]="formulario.controls.nombre.invalid && formulario.controls.nombre.touched ? 'error' : ''" />
+
+        @if (formulario.controls.nombre.errors && formulario.controls.nombre.touched) {
+          @if (formulario.controls.nombre.errors['required']) {
+            <small class="small-error">El nombre es obligatorio</small>
+          }
+
+          @else if (formulario.controls.nombre.errors['minlength']) {
+            <small class="small-error">
+              Mínimo {{ formulario.controls.nombre.errors['minlength'].requiredLength }} caracteres
+            </small>
+          }
+
         }
+      </div>
 
-        @else if (formulario.controls.nombre.errors['minlength']) {
-          <small class="small-error">
-            Mínimo {{ formulario.controls.nombre.errors['minlength'].requiredLength }} caracteres
-          </small>
+      <!-- APELLIDO -->
+      <div class="form-group">
+        <label for="apellido">Apellido</label>
+        <input id="apellido" type="text" formControlName="apellido"
+          [className]="formulario.controls.apellido.invalid && formulario.controls.apellido.touched ? 'error' : ''" />
+
+        @if (formulario.controls.apellido.errors && formulario.controls.apellido.touched) {
+
+          @if (formulario.controls.apellido.errors['required']) {
+            <small class="small-error">El apellido es obligatorio</small>
+          }
+
+          @else if (formulario.controls.apellido.errors['minlength']) {
+            <small class="small-error">
+              Mínimo {{ formulario.controls.apellido.errors['minlength'].requiredLength }} caracteres
+            </small>
+          }
+
         }
+      </div>
 
-      }
+      <!-- MAIL -->
+      <div class="form-group">
+        <label for="mail">Mail</label>
+        <input id="mail" type="email" formControlName="mail"
+          [className]="formulario.controls.mail.invalid && formulario.controls.mail.touched ? 'error' : ''" />
 
+        @if (formulario.controls.mail.errors && formulario.controls.mail.touched) {
 
-    <!-- APELLIDO -->
-  
-      <label for="apellido">Apellido</label>
-      <input id="apellido" type="text" formControlName="apellido"
-        [className]="formulario.controls.apellido.invalid && formulario.controls.apellido.touched ? 'error' : ''" />
+          @if (formulario.controls.mail.errors['required']) {
+            <small class="small-error">El mail es obligatorio</small>
+          }
 
-      @if (formulario.controls.apellido.errors && formulario.controls.apellido.touched) {
+          @else if (formulario.controls.mail.errors['email']) {
+            <small class="small-error">Formato inválido</small>
+          }
 
-        @if (formulario.controls.apellido.errors['required']) {
-          <small class="small-error">El apellido es obligatorio</small>
         }
+      </div>
 
-        @else if (formulario.controls.apellido.errors['minlength']) {
-          <small class="small-error">
-            Mínimo {{ formulario.controls.apellido.errors['minlength'].requiredLength }} caracteres
-          </small>
+      <!-- EDAD -->
+      <div class="form-group">
+        <label for="edad">Edad</label>
+        <input id="edad" type="number" formControlName="edad"
+          [className]="formulario.controls.edad.invalid && formulario.controls.edad.touched ? 'error' : ''" />
+
+        @if (formulario.controls.edad.errors && formulario.controls.edad.touched) {
+
+          @if (formulario.controls.edad.errors['required']) {
+            <small class="small-error">La edad es obligatoria</small>
+          }
+
+          @else if (formulario.controls.edad.errors['min']) {
+            <small class="small-error">Edad mínima 10</small>
+          }
+
+          @else if (formulario.controls.edad.errors['max']) {
+            <small class="small-error">Edad máxima 99</small>
+          }
+
         }
+      </div>
 
-      }
+      <!-- PASSWORD -->
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" formControlName="password"
+          [className]="formulario.controls.password.invalid && formulario.controls.password.touched ? 'error' : ''" />
 
-    <!-- MAIL -->
-   
-      <label for="mail">Mail</label>
-      <input id="mail" type="email" formControlName="mail"
-        [className]="formulario.controls.mail.invalid && formulario.controls.mail.touched ? 'error' : ''" />
+        @if (formulario.controls.password.errors && formulario.controls.password.touched) {
 
-      @if (formulario.controls.mail.errors && formulario.controls.mail.touched) {
+          @if (formulario.controls.password.errors['required']) {
+            <small class="small-error">La contraseña es obligatoria</small>
+          }
 
-        @if (formulario.controls.mail.errors['required']) {
-          <small class="small-error">El mail es obligatorio</small>
         }
+      </div>
 
-        @else if (formulario.controls.mail.errors['email']) {
-          <small class="small-error">Formato inválido</small>
-        }
-      }
+      <button type="submit" class="btn-submit">Mostrar Datos</button>
 
-    <!-- EDAD -->
-    
-      <label for="edad">Edad</label>
-
-      <input id="edad" type="number" formControlName="edad"
-
-        [className]="formulario.controls.edad.invalid && formulario.controls.edad.touched ? 'error' : ''" />
-      
-      @if (formulario.controls.edad.errors && formulario.controls.edad.touched) {
-
-        @if (formulario.controls.edad.errors['required']) {
-
-          <small class="small-error">La edad es obligatoria</small>
-        }
-
-        @else if (formulario.controls.edad.errors['min']) {
-
-          <small class="small-error">Edad mínima 10</small>
-        }
-
-        @else if (formulario.controls.edad.errors['max']) {
-
-          <small class="small-error">Edad máxima 99</small>
-        }
-
-      }
-
-    <!-- PASSWORD -->
-      <label for="password">Contraseña</label>
-      <input id="password" type="password" formControlName="password"
-        [className]="formulario.controls.password.invalid && formulario.controls.password.touched ? 'error' : ''" />
-
-      @if (formulario.controls.password.errors && formulario.controls.password.touched) {
-
-        @if (formulario.controls.password.errors['required']) {
-          <small class="small-error">La contraseña es obligatoria</small>
-        }
-
-      }
-    </div>
-
-    <button type="submit" class="btn-submit">Mostrar Datos</button>
-
-  </form>
+    </form>
+  </div>
+</div>

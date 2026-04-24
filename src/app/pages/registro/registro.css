@@ -2,7 +2,7 @@
 /* Contenedor centrado */
 .card-container {
     max-width: 400px;
-    margin: 50px auto;
+    margin: 10px auto;
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -12,11 +12,11 @@
 
 /* Título */
 .card-title {
+   
     background: linear-gradient(135deg, #6ec6ff, #42a5f5);
     color: #000;
     text-align: center;
     padding: 20px;
-    margin: 0;
     font-size: 24px;
     font-weight: bold;
 }
@@ -29,6 +29,7 @@
 .form-group {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 /* Labels */
@@ -77,3 +78,13 @@ input {
     background-color: #ffe5e5;
 }
 
+#fondo {
+    
+    background-image:url('/image/fondoRegistro.png');
+    background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* La imagen se queda fija al hacer scroll */
+    background-position: center; /* Centra la imagen */
+
+    height: 100vh;
+}
