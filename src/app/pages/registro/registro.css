@@ -1,0 +1,79 @@
+
+/* Contenedor centrado */
+.card-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Título */
+.card-title {
+    background: linear-gradient(135deg, #6ec6ff, #42a5f5);
+    color: #000;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Formulario */
+.card-form {
+    padding: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+
+
+}
+
+/* Inputs */
+input {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    border: 1px solid #edd8d8;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+/* Botón */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #42a5f5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+/* Hover botón */
+.btn-submit:hover {
+    background: #3197f0;
+}
+
+/* ERROR (tu clase existente) */
+.error {
+    border: 2px solid rgba(255, 0, 0, 0.437) ;
+    background-color: #ffe5e5;
+}
+

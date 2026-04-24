@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule,Validator } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
 
 
 
@@ -10,13 +10,24 @@ import { FormControl, FormGroup, ReactiveFormsModule,Validator } from '@angular/
   styleUrl: './registro.css',
 })
 export class Registro{
-  formulario = new FormGroup({
-    nombre: new FormControl(''),
-    apellido: new FormControl(''),
-    mail: new FormControl(''),
-    edad: new FormControl(),
-    password: new FormControl('')
-  });
+  
+formulario = new FormGroup({
+  nombre: new FormControl('', {
+    validators: [Validators.minLength(3), Validators.required]
+  }),
+  apellido: new FormControl('', {
+    validators: [Validators.minLength(4), Validators.required]
+  }),
+  mail: new FormControl('', {
+    validators: [Validators.email, Validators.required]
+  }),
+  edad: new FormControl('', {
+    validators: [Validators.required, Validators.min(10), Validators.max(99)]
+  }),
+  password: new FormControl('', {
+    validators: [Validators.required]
+  })
+});
 
   mosrarDatos(){
     console.log(this.formulario.value);
@@ -25,21 +36,5 @@ export class Registro{
 
 
 
-/*
-  nombre = new FormControl('Ingresa tu nombre',{});
-  apellido = new FormControl('Ingresa tu apellido');
-  mail = new FormControl('Ingresa tu email');
-  edad = new FormControl();
-  password = new FormControl('Ingresa tu contraseña');
-
-  mosrarDatos(){
-    console.log(this.nombre.value);
-    console.log(this.apellido.value);
-    console.log(this.mail.value);
-    console.log(this.edad.value);
-    console.log(this.password.value);
-
-}
-*/
 
 }
