@@ -29,7 +29,6 @@
 .form-group {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
 }
 
 /* Labels */
