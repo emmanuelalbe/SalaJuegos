@@ -45,6 +45,18 @@ export class AuthService  {
       }
   }
 
+  async login(datos:{email:string, password:string}): Promise<void> {
+    const response: AuthResponse = await this.supabase?.auth.signInWithPassword({
+      email: datos.email,
+      password: datos.password
+    });
+    if(response.error){
+      console.log(response.error.message)
+    }{
+      console.log(response.data);
+      this.usuarioActual = response.data.user;
+    }
+
 }
 
-
+}

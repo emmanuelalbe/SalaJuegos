@@ -1,0 +1,125 @@
+/* Fondo general */
+#fondo {
+    background-image: url('/image/fondoRegistro.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card principal */
+.card {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    backdrop-filter: blur(5px);
+}
+
+/* Título */
+.card-title {
+    background: linear-gradient(135deg, #6ec6ff, #42a5f5);
+    color: #000;
+    text-align: center;
+    padding: 25px;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Formulario */
+.card-form {
+    padding: 25px;
+}
+
+/* Grupo */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    font-size: 14px;
+}
+
+/* Inputs */
+input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Focus en inputs */
+input:focus {
+    border: 1px solid #42a5f5;
+    box-shadow: 0 0 8px rgba(66, 165, 245, 0.4);
+}
+
+/* Botón */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+/* Hover botón */
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(66, 165, 245, 0.4);
+}
+
+/* ERROR */
+.error {
+    border: 2px solid rgba(255, 0, 0, 0.5);
+    background-color: #ffe5e5;
+}
+
+/* Mensajes de error */
+.small-error {
+    color: #d32f2f;
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: left;
+}
+
+/* Animación suave */
+.card {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

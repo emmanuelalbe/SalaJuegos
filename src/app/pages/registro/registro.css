@@ -2,7 +2,7 @@
 /* Contenedor centrado */
 .card-container {
     max-width: 400px;
-    margin: 10px auto;
+    margin: auto;
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -12,7 +12,7 @@
 
 /* Título */
 .card-title {
-   
+
     background: linear-gradient(135deg, #6ec6ff, #42a5f5);
     color: #000;
     text-align: center;
