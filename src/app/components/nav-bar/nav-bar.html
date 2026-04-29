@@ -1,3 +1,7 @@
 <nav class="navbar">
+   
     <button class="nav-btn" *ngFor="let item of menu"  [routerLink]="item.route"  > {{ item.label }}</button>
+    @if(this.authService.usuarioActual()){
+    <button class="nav-btn" (click) = 'this.authService.cerrarSesion()' >Cerrar Sesion</button>
+    }
 </nav>

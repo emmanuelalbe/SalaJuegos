@@ -25,20 +25,23 @@ export class AuthService  {
   router: Router;
 
   constructor(){
+    
       this.supabase = createClient(this.supabaseUrl,this.publicKey);
 
       this.router = inject(Router);
 
-      this.supabase.auth.getUser().then((response : UserResponse) => {
+      this.supabase.auth.onAuthStateChange((event,session)=>{
 
-      if(response.error){
+        const user = session?.user;
 
-        console.log(response.error.message);
-      }else{
-        this.usuarioActual.set(response.data.user);
-      }
+        this.usuarioActual.set(user ?? null)
 
-      });
+        if(user){
+          this.router.navigateByUrl('home')
+        }else{
+          this.router.navigateByUrl('registro')
+        }
+      })
   }
 
   
@@ -54,10 +57,8 @@ export class AuthService  {
         }
       }
     });
-    //Louirder Garcia
       if(response.error){
         console.log(response.error.message)
-        // Manejo de errores
         alert("Error al registrar usuario");
       }else{
         console.log(response.data);
@@ -80,8 +81,9 @@ export class AuthService  {
 
 }
 
-  cerrarSesion(): void {
+  async cerrarSesion(): Promise<void> {
     this.supabase.auth.signOut();
+    this.usuarioActual.set(null)
     this.router.navigate(['/login']);
     
   }

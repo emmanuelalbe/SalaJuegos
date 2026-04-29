@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../config/services/auth-service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,6 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 
 export class NavBar {
+  authService = inject(AuthService)
 
   primaryColor: string = '#4f46e5';     
   secondaryColor: string = '#06b6d4';  
@@ -29,7 +31,10 @@ export class NavBar {
     { label: 'Home', route: 'home' },
     { label: 'Login', route: 'login' },
     { label: 'Registro', route: 'registro' },
-    { label: 'About Me', route: 'about-me' }
+    { label: 'About Me', route: 'about-me' },
+    { label: 'Ahorcado', route: 'ahorcado' },
+    { label: 'preguntados', route: 'preguntados' },
+    { label: 'Mayor o Menor', route: 'mayor-menor' }
   ];
 
 }
