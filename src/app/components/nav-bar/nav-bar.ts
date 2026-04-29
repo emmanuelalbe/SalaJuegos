@@ -1,41 +1,54 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink,Router } from '@angular/router';
 import { AuthService } from '../../config/services/auth-service';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [RouterLink,CommonModule],
+  imports: [CommonModule],
   templateUrl: './nav-bar.html',
   styleUrl: './nav-bar.css',
 })
 
 export class NavBar {
-  authService = inject(AuthService)
 
-  primaryColor: string = '#4f46e5';     
-  secondaryColor: string = '#06b6d4';  
-  textColor: string = '#ffffff';
-  hoverColor: string = '#4338ca';
+  authService = inject(AuthService);
 
-  // Estilos generales
-  borderRadius: string = '8px';
-  padding: string = '10px 16px';
-  fontSize: string = '14px';
-  fontWeight: string = '500';
-
-
-  // array menu para iterar en el html y generar los botones de navegación
+  router = inject(Router);
 
   menu = [
-    { label: 'Home', route: 'home' },
-    { label: 'Login', route: 'login' },
-    { label: 'Registro', route: 'registro' },
-    { label: 'About Me', route: 'about-me' },
-    { label: 'Ahorcado', route: 'ahorcado' },
-    { label: 'preguntados', route: 'preguntados' },
-    { label: 'Mayor o Menor', route: 'mayor-menor' }
+    { label: 'Login', route: 'login', auth: false },
+    { label: 'Registro', route: 'registro', auth: false },
+    { label: 'About Me', route: 'about-me', auth: true },
+    { label: 'Home', route: 'home', auth: true },
+    { label: 'Ahorcado', route: 'ahorcado', auth: true },
+    { label: 'Preguntados', route: 'preguntados', auth: true },
+    { label: 'Mayor o Menor', route: 'mayor-menor', auth: true }
   ];
+  navegar(ruta: string) {
 
+  const estaLogueado = !!this.authService.usuarioActual();
+
+  // ✅ rutas públicas
+  const rutasPublicas = ['login', 'registro'];
+
+  // ❌ si NO está logueado y quiere ir a privada → lo mando a login
+  if (!estaLogueado && !rutasPublicas.includes(ruta)) {
+    this.router.navigateByUrl('login');
+    return;
+  }
+
+  // ❌ si está logueado y quiere ir a login/registro → lo mando a home
+  if (estaLogueado && rutasPublicas.includes(ruta)) {
+    this.router.navigateByUrl('home');
+    return;
+  }
+
+  // ✅ navegación normal
+  this.router.navigateByUrl(ruta);
+}
+  cerrarSesion() {
+    this.authService.cerrarSesion();
+  }
 }
 

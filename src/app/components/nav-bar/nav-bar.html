@@ -1,7 +1,21 @@
 <nav class="navbar">
-   
-    <button class="nav-btn" *ngFor="let item of menu"  [routerLink]="item.route"  > {{ item.label }}</button>
-    @if(this.authService.usuarioActual()){
-    <button class="nav-btn" (click) = 'this.authService.cerrarSesion()' >Cerrar Sesion</button>
-    }
+
+  <ng-container *ngFor="let item of menu">
+
+    <button 
+      class="nav-btn"
+      *ngIf="(authService.usuarioActual() && item.auth) || (!authService.usuarioActual() && !item.auth)"
+      (click)="navegar(item.route)"
+    >
+      {{ item.label }}
+    </button>
+
+  </ng-container>
+
+  @if(this.authService.usuarioActual()){
+    <button class="nav-btn" (click)="cerrarSesion()">
+      Cerrar Sesión
+    </button>
+  }
+
 </nav>

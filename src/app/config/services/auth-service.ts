@@ -38,8 +38,6 @@ export class AuthService  {
 
         if(user){
           this.router.navigateByUrl('home')
-        }else{
-          this.router.navigateByUrl('registro')
         }
       })
   }

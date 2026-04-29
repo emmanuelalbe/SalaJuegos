@@ -14,22 +14,45 @@ import { Ahorcado } from './pages/Juegos/ahorcado/ahorcado';
 
 import { MayorMenor } from './pages/Juegos/mayormenor/mayor-menor';
 
+import { authGuardGuard } from './config/guard/auth-guard-guard';
+
 export const routes: Routes = [
 
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  
-  { path: 'home', loadComponent: () => import('./pages/home/home').then(m => m.Home) },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-  { path: 'login', loadComponent: () => import('./pages/login/login').then(m => m.Login) },
+  {
+    path: 'home',
+    canActivate: [authGuardGuard],
+    loadComponent: () => import('./pages/home/home').then(m => m.Home)
+  },
+  {
+    path: 'about-me',
+    canActivate: [authGuardGuard],
+    loadComponent: () => import('./pages/about-me/about-me').then(m => m.AboutMe)
+  },
+  {
+    path: 'preguntados',
+    canActivate: [authGuardGuard],
+    loadComponent: () => import('./pages/Juegos/preguntados/preguntados').then(m => m.Preguntados)
+  },
+  {
+    path: 'ahorcado',
+    canActivate: [authGuardGuard],
+    loadComponent: () => import('./pages/Juegos/ahorcado/ahorcado').then(m => m.Ahorcado)
+  },
+  {
+    path: 'mayor-menor',
+    canActivate: [authGuardGuard],
+    loadComponent: () => import('./pages/Juegos/mayormenor/mayor-menor').then(m => m.MayorMenor)
+  },
 
-  { path: 'about-me', loadComponent: () => import('./pages/about-me/about-me').then(m => m.AboutMe) },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login').then(m => m.Login)
+  },
+  {
+    path: 'registro',
+    loadComponent: () => import('./pages/registro/registro').then(m => m.Registro)
+  }
 
-  { path: 'registro', loadComponent: () => import('./pages/registro/registro').then(m => m.Registro) },
-
-  { path: 'preguntados', loadComponent: () => import('./pages/Juegos/preguntados/preguntados').then(m => m.Preguntados)},
-
-  { path: 'ahorcado', loadComponent: () => import('./pages/Juegos/ahorcado/ahorcado').then(m => m.Ahorcado) },
-
-  { path: 'mayor-menor', loadComponent: () => import('./pages/Juegos/mayormenor/mayor-menor').then(m => m.MayorMenor) }
 ];
-
