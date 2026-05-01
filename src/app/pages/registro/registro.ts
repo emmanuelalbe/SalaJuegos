@@ -37,15 +37,23 @@ formulario = new FormGroup({
   }),
   password: new FormControl('', {
     nonNullable: true,
-    validators: [Validators.required]
+    validators: [
+      Validators.required,
+      Validators.minLength(6),
+      // min 1 minúscula, 1 mayúscula y 1 número (regla de Supabase)
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/)
+    ]
   })
 });
 
-  mostrarDatos(){
+  async mostrarDatos(){
 
   const datos = this.formulario.getRawValue();
   
-    this.authService.registrarUsuario(datos);
+    const res = await this.authService.registrarUsuario(datos);
+    if (!res.ok) {
+      alert(res.error);
+    }
 
 }
 

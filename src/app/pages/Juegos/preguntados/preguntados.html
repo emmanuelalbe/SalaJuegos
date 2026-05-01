@@ -1,1 +1,53 @@
-<p>preguntados works!</p>
+<div class="contenedor-general">
+  <div class="card">
+    <h2>Preguntados</h2>
+
+    <div class="top">
+      <span><strong>Pregunta:</strong> {{ indice + 1 }} / {{ preguntas.length || total }}</span>
+      <span><strong>Aciertos:</strong> {{ aciertos }}</span>
+    </div>
+
+    <div *ngIf="cargando" class="estado">
+      Cargando preguntas...
+    </div>
+
+    <div *ngIf="!cargando && error" class="estado error">
+      {{ error }}
+      <button class="btn" (click)="iniciarPartida()">Reintentar</button>
+    </div>
+
+    <div *ngIf="!cargando && !error && preguntaActual as q" class="pregunta">
+      <p class="categoria">
+        {{ q.category }} · {{ q.difficulty }}
+      </p>
+      <h3 class="texto">{{ q.question }}</h3>
+
+      <div class="opciones">
+        <button
+          class="btn-opcion"
+          *ngFor="let op of opciones"
+          (click)="seleccionar(op)"
+          [disabled]="bloqueado || terminado"
+          [class.correcta]="bloqueado && esCorrecta(op)"
+          [class.incorrecta]="bloqueado && opcionSeleccionada === op && !esCorrecta(op)"
+        >
+          {{ op }}
+        </button>
+      </div>
+
+      <div class="acciones">
+        <button class="btn" (click)="iniciarPartida()" [disabled]="guardando">Reiniciar</button>
+        <button class="btn primario" (click)="siguiente()" [disabled]="!bloqueado || guardando">
+          {{ indice >= preguntas.length - 1 ? 'Finalizar' : 'Siguiente' }}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="terminado" class="resultado">
+      <h3>Resultado</h3>
+      <p>Acertaste <strong>{{ aciertos }}</strong> de <strong>{{ preguntas.length }}</strong>.</p>
+      <p *ngIf="guardando">Guardando partida...</p>
+      <button class="btn primario" (click)="iniciarPartida()">Jugar otra vez</button>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,15 @@ export class Login {
 
   authService = inject(AuthService);
 
+  modalAbierto = false;
+  modalMensaje = '';
+
+  accesosRapidos = [
+    { label: 'Acceso rápido 1', email: 'rapido1@demo.com', password: 'Rapido123' },
+    { label: 'Acceso rápido 2', email: 'rapido2@demo.com', password: 'Rapido123' },
+    { label: 'Acceso rápido 3', email: 'rapido3@demo.com', password: 'Rapido123' },
+  ];
+
   formulario = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
@@ -25,8 +34,31 @@ export class Login {
     })
   });
 
-  ingresar() {
+  async ingresar() {
+    if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
+    }
     const datos = this.formulario.getRawValue();
-    this.authService.login(datos);
+    const result = await this.authService.login(datos);
+
+    if (!result.ok) {
+      this.abrirModal(result.error);
+    }
+  }
+
+  abrirModal(mensaje: string) {
+    this.modalMensaje = mensaje;
+    this.modalAbierto = true;
+  }
+
+  cerrarModal() {
+    this.modalAbierto = false;
+  }
+
+  ingresarRapido(email: string, password: string) {
+    this.formulario.setValue({ email, password });
+    this.formulario.markAllAsTouched();
+    void this.ingresar();
   }
 }

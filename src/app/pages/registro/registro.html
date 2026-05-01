@@ -100,6 +100,12 @@
           @if (formulario.controls.password.errors['required']) {
             <small class="small-error">La contraseña es obligatoria</small>
           }
+          @else if (formulario.controls.password.errors['minlength']) {
+            <small class="small-error">Mínimo 6 caracteres</small>
+          }
+          @else if (formulario.controls.password.errors['pattern']) {
+            <small class="small-error">Debe tener 1 mayúscula, 1 minúscula y 1 número</small>
+          }
 
         }
       </div>

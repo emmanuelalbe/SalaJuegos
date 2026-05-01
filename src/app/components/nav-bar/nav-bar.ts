@@ -25,26 +25,23 @@ export class NavBar {
     { label: 'Preguntados', route: 'preguntados', auth: true },
     { label: 'Mayor o Menor', route: 'mayor-menor', auth: true }
   ];
+
   navegar(ruta: string) {
 
   const estaLogueado = !!this.authService.usuarioActual();
 
-  // ✅ rutas públicas
   const rutasPublicas = ['login', 'registro'];
 
-  // ❌ si NO está logueado y quiere ir a privada → lo mando a login
   if (!estaLogueado && !rutasPublicas.includes(ruta)) {
     this.router.navigateByUrl('login');
     return;
   }
 
-  // ❌ si está logueado y quiere ir a login/registro → lo mando a home
   if (estaLogueado && rutasPublicas.includes(ruta)) {
     this.router.navigateByUrl('home');
     return;
   }
 
-  // ✅ navegación normal
   this.router.navigateByUrl(ruta);
 }
   cerrarSesion() {

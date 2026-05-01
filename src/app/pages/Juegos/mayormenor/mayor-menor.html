@@ -1,1 +1,53 @@
-<p>mayor-menor works!</p>
+<div class="contenedor-general">
+
+  <!-- JUEGO -->
+  <div class="juego-container">
+
+    <h2>Mayor o Menor</h2>
+
+    <p>Carta actual: {{ cartaActual }}</p>
+
+    <div class="botones">
+      <button (click)="jugar('mayor')" [disabled]="juegoTerminado">
+        Mayor
+      </button>
+
+      <button (click)="jugar('menor')" [disabled]="juegoTerminado">
+        Menor
+      </button>
+    </div>
+
+    <p class="mensaje">{{ mensaje }}</p>
+
+    <p>Puntaje: {{ puntaje }}</p>
+    <p>Vidas: {{ vidas }}</p>
+
+    <button (click)="iniciarJuego()">Reiniciar</button>
+
+  </div>
+
+  <div class="ranking-container">
+
+    <h3>Ranking</h3>
+
+    <div *ngIf="ranking.length > 0; else sinDatos">
+
+      <div class="ranking-item" *ngFor="let item of ranking; let i = index">
+
+        <span>#{{ i + 1 }}</span>
+
+        <span>{{ item.email || 'Usuario' }}</span>
+
+        <span>{{ item.puntaje }} pts</span>
+
+      </div>
+
+    </div>
+
+    <ng-template #sinDatos>
+      <p>No hay partidas aún</p>
+    </ng-template>
+
+  </div>
+
+</div>

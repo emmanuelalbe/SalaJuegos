@@ -7,38 +7,60 @@
 
 /* Card */
 .card {
-  width: 300px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 520px;
+  border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* Hover */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.28);
 }
 
-/* Título */
-.card h2 {
-  font-size: 1.4rem;
-  margin: 16px;
-  color: #333;
+/* Header */
+.card-header {
+  padding: 16px 18px 10px;
 }
 
-/* Imagen */
-.card img {
+.card-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: #111827;
+}
+
+/* Media */
+.card-media {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  padding: 0 18px 10px;
 }
 
-/* Descripción */
-.card p {
-  font-size: 0.95rem;
-  color: #666;
-  margin: 16px;
-  line-height: 1.4;
+.card-media img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* Body */
+.card-body {
+  padding: 6px 18px 18px;
+}
+
+.card-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  opacity: 0.95;
+  color: #111827;
 }

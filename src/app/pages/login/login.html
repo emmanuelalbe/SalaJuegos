@@ -47,6 +47,30 @@
 
                 <button type="submit" class="btn-submit">Ingresar</button>
 
+                <div class="quick-login">
+                    <p class="quick-title">Inicio rápido (profesor)</p>
+                    <div class="quick-buttons">
+                        @for (u of accesosRapidos; track u.email) {
+                            <button type="button" class="btn-quick" (click)="ingresarRapido(u.email, u.password)">
+                                {{ u.label }}
+                            </button>
+                        }
+                    </div>
+                </div>
+
                 </form>
         </div>
     </div> 
+
+    @if (modalAbierto) {
+        <div class="modal-backdrop" (click)="cerrarModal()" role="presentation"></div>
+        <div class="modal" role="dialog" aria-modal="true" aria-label="Error de inicio de sesión">
+            <div class="modal-card" (click)="$event.stopPropagation()">
+                <h2 class="modal-title">No se pudo iniciar sesión</h2>
+                <p class="modal-message">{{ modalMensaje }}</p>
+                <div class="modal-actions">
+                    <button type="button" class="btn-modal" (click)="cerrarModal()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    }

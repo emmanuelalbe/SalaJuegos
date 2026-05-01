@@ -1,1 +1,68 @@
-<p>ahorcado works!</p>
+<div class="contenedor-general">
+
+  <div class="juego-container">
+    
+    <h2>Juego del Ahorcado</h2>
+
+    <p>Vidas: {{ vidas }}</p>
+    <div class="debug">
+      <p><strong>Última letra:</strong> {{ ultimaLetra }}</p>
+      <p><strong>Palabra (debug):</strong> {{ palabra }}</p>
+    </div>
+
+    <!-- PALABRA -->
+    <div class="palabra">
+      <span *ngFor="let letra of palabraOculta">
+        {{ letra }}
+      </span>
+    </div>
+
+    <!-- LETRAS -->
+    <div class="letras">
+      <button 
+        *ngFor="let letra of letras"
+        (click)="seleccionarLetra(letra)"
+        [disabled]="letrasUsadas.includes(letra) || mostrarModal"
+      >
+        {{ letra }}
+      </button>
+    </div>
+
+    <!-- REINICIAR -->
+    <button (click)="iniciarJuego()">Reiniciar</button>
+
+  </div>
+
+  <!-- 🔥 RANKING (AHORA BIEN INTEGRADO) -->
+  <div class="ranking-container">
+
+    <h3>🏆 Ranking</h3>
+
+    <div *ngIf="ranking.length > 0; else sinDatos">
+
+      <div class="ranking-item" *ngFor="let item of ranking; let i = index">
+        <span>#{{ i + 1 }}</span>
+        <span>{{ item.nombre || item.email || 'Usuario' }}</span>
+        <span>{{ item.tiempo_segundos }}s</span>
+        <span>{{ item.letras_usadas }} letras</span>
+      </div>
+
+    </div>
+
+    <!-- 🔽 fallback -->
+    <ng-template #sinDatos>
+      <p>No hay partidas aún</p>
+    </ng-template>
+
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal">
+    <h2>{{ mensajeModal }}</h2>
+    <button (click)="cerrarModal()">Cerrar</button>
+    <button (click)="iniciarJuego()">Reiniciar</button>
+  </div>
+</div>
