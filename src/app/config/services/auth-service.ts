@@ -1,5 +1,11 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { AuthResponse, createClient, SupabaseClient, User } from '@supabase/supabase-js';
+import {
+  AuthResponse,
+  createClient,
+  RealtimeChannel,
+  SupabaseClient,
+  User,
+} from '@supabase/supabase-js';
 import { usuarioRegistro } from '../../models/usuarioRegistro';
 import { Router } from '@angular/router';
 
@@ -9,9 +15,12 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   supabaseUrl = 'https://igirdobwmknqfucrsxbk.supabase.co';
-  publicKey = ' sb_publishable_Cc_fDA4zDKetBTDgb3Ayhw_hDK64eyR';
+  publicKey = 'sb_publishable_Cc_fDA4zDKetBTDgb3Ayhw_hDK64eyR';
 
   supabase: SupabaseClient<any, 'public', 'public', any, any>;
+
+  /** Canal Realtime reutilizado por el chat para `postgres_changes` en `mensajes`. */
+  canal!: RealtimeChannel;
 
   usuarioActual = signal<User | null>(null);
 
@@ -19,6 +28,7 @@ export class AuthService {
 
   constructor() {
     this.supabase = createClient(this.supabaseUrl, this.publicKey);
+    this.canal = this.supabase.channel('mensajes-chat');
     this.router = inject(Router);
 
     this.supabase.auth.onAuthStateChange((event, session) => {
@@ -92,14 +102,12 @@ export class AuthService {
       letras_usadas: data.letras
     };
 
-    // Mejor esfuerzo: guardar identificador visible (si la tabla tiene columnas).
     const insertConUsuario = {
       ...baseInsert,
       email: user.email ?? null,
       nombre: (user.user_metadata as any)?.nombre ?? null
     };
 
-    // Si la tabla no tiene esas columnas, reintentamos con el insert base.
     const { error } = await this.supabase.from('partidas_ahorcado').insert(insertConUsuario as any);
     if (error) {
       const { error: fallbackError } = await this.supabase.from('partidas_ahorcado').insert(baseInsert as any);
@@ -170,6 +178,29 @@ export class AuthService {
         aciertos: datos.aciertos,
         total_preguntas: datos.total_preguntas
       });
+
+    if (error) console.error(error);
+  }
+
+  async traerMensajesYaExistentes() {
+    const { data, error } = await this.supabase
+      .from('mensajes')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) {
+      console.error(error);
+      return [];
+    }
+
+    return data ?? [];
+  }
+
+  async enviarMensaje(usuario: string, contenido: string) {
+    const { error } = await this.supabase.from('mensajes').insert({
+      usuario,
+      contenido,
+    });
 
     if (error) console.error(error);
   }
